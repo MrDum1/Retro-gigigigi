@@ -20,7 +20,7 @@
             <div class="camera">
 
                 <video id="video">No Video.</video>
-                <button id="start" style="margin-bottom: 10px;">Take a Picture!</button>
+                <button id="start" style="margin: 10px;">Take a Picture!</button>
 
             </div>
 
@@ -29,34 +29,28 @@
             <canvas id="canvas" style="display: none;"></canvas>
 
             <div class="output">
-                <img id="photo" src="" alt="The photo will be here!"/>
+                <img id="photo" src=""/>
+            </div>
+    
+            <div id="grid" aria-label="Puzzle pieces"></div>
+
+            <div>
+                <input type="file" id="imageInput" accept="image/*">
             </div>
 
-            <div id="grid" aria-label="Puzzle pieces"></div>
             <div>
                 <button id="imageSplitter">Make My Puzzle You Peasant!</button>
             </div>
-            <p id="splitterStatus" role="status" aria-live="polite"></p>
 
-            <input type="file" id="imageInput" accept="image/*">
-
-        </div>
-
-        <div style="display: flex; flex-direction: row;">
-            <label for="choices">Choose a mode:</label>
-            <select name="options" id="options">
-                <option value="option1">Regular</option>
-                <option value="option2">Block</option>
-            </select>
         </div>
 
         <div class="puzzle-size">
 
              <p>
                 Puzzle pieces (columns x rows):
-                <input type="number" id="width" min="1" max="20" value="3" style="width:50px;" aria-label="Number of puzzle columns">
+                <input type="number" id="width" min="1" max="20" value="3" style="width:40px;" aria-label="Number of puzzle columns">
                 x
-                <input type="number" id="length" min="1" max="20" value="3" style="width:50px;" aria-label="Number of puzzle rows">
+                <input type="number" id="length" min="1" max="20" value="3" style="width:40px;" aria-label="Number of puzzle rows">
             </p>
 
             <script src="splitting and dragging"></script>
