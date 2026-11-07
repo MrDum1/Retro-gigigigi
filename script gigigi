@@ -1,0 +1,27 @@
+
+const camera = document.getElementById('camera');
+const canvas = document.getElementById('canvas');
+const photoButton = document.getElementById('photo');
+const picture = document.getElementById('picture')
+
+async function takePicture()
+{
+    try 
+    {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: {width: 640, height: 480}, audio: false})
+        video.srcObject = stream;
+    }
+    catch (error) { console.error("Error Accessing Camera:", error)};
+}
+
+photoButton.addEventListener("click", () => 
+    {
+        const context = canvas.getContext('2d');
+
+        context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+        const imgURL = canvas.toDataURL('img/jpeg');
+        picture.src = imgURL;
+    });
+
+takePicture();
