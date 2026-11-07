@@ -9,11 +9,15 @@
 <body>
 
     <p>Welcome to the Website Gigigi! This is a sample webpage.</p>
-    <video id="camera" autoplay playsinline width="640" height="480" style="display: none;"></video>
-    <button id="photo">Take a Picture!</button>
+    <div class="camera">
+        <video id="video">No Video.</video>
+        <button id="start">Take a Picture!</button>
+    </div>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div class="output">
+        <img id="photo" src="" alt="The photo will be here!"/>
+    </div>
     <input type="file" name="myFiles" id="fileInput" multiple>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-    <img id="picture" />
 
     <label for="choices">Choose a bubble option:</label>
     <select name="options" id="options">
@@ -23,5 +27,6 @@
 
     <button id="generateButton">Generate</button>
 
+    <script src="script gigigi"></script>
 </body>
 </html>
