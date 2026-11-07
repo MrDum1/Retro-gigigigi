@@ -24,28 +24,21 @@
 
             </div>
 
-    <label for="choices">Choose a mode:</label>
-    <select name="options" id="options">
-        <option value="option1">Regular</option>
-        <option value="option2">Block</option>
-    </select>
+    
             <canvas id="canvas" style="display: none;"></canvas>
 
             <div class="output">
                 <img id="photo" src="" alt="The photo will be here!"/>
             </div>
 
+            <div id="grid" aria-label="Puzzle pieces"></div>
+            <div>
+                <button id="imageSplitter">Make My Puzzle You Peasant!</button>
+            </div>
+            <p id="splitterStatus" role="status" aria-live="polite"></p>
+
             <input type="file" id="imageInput" accept="image/*">
 
-    <div id="grid"></div>
-    <div>
-        <button id="imageSplitter">Make My Puzzle You Peasant!</button>
-    </div>
-
-    <input type="file" id="imageInput" accept="image/*">
-
-    <script src="script gigigi"></script>
-    <script src="splitting and dragging"></script>
         </div>
 
         <div style="display: flex; flex-direction: row;">
@@ -54,20 +47,22 @@
                 <option value="option1">Regular</option>
                 <option value="option2">Block</option>
             </select>
-
-            <script src="script gigigi"></script>
-
         </div>
 
-        <div style="display: flex; flex-direction: columns;">
+        <div class="puzzle-size">
 
              <p>
-                The size of the image is <input type="number" id="width" style="width:50px;"> x <input type="number" id="length" style="width:50px;">.
+                Puzzle pieces (columns x rows):
+                <input type="number" id="width" min="1" max="20" value="3" style="width:50px;" aria-label="Number of puzzle columns">
+                x
+                <input type="number" id="length" min="1" max="20" value="3" style="width:50px;" aria-label="Number of puzzle rows">
             </p>
 
-            <button id="submitButton">Submit</button>
+            <script src="splitting and dragging"></script>
 
         </div>
+
+        <script src="script gigigi"></script>
     
     </body>
 </html>

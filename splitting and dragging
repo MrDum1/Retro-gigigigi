@@ -3,6 +3,9 @@ const image = document.getElementById('photo')
 const imageSplitter = document.getElementById('imageSplitter');
 const grid = document.getElementById('grid');
 
+const widthInput = document.getElementById('width');
+const lengthInput = document.getElementById('length');
+
 function splitImage (imageSelector, rows, cols)
 {
     const img = document.querySelector(imageSelector);
@@ -54,7 +57,7 @@ function splitImage (imageSelector, rows, cols)
 }
 
 imageSplitter.addEventListener('click', () => {
-    if (!image.src == '') { splitImage('#photo', 3, 3); pieceDragging(); image.hidden = true; } else { return; }
+    if (!image.src == '') { splitImage('#photo', widthInput.valueAsNumber, lengthInput.valueAsNumber); pieceDragging(); image.hidden = true; } else { return; }
 });
 
 function pieceDragging()
