@@ -11,10 +11,21 @@ const photo = document.getElementById("photo");
 
 video.hidden = true;
 
+const imageInput = document.getElementById('imageInput');
+const imagePreview = document.getElementById('imagePreview');
+
+imageInput.addEventListener('change', function() {
+    const file = this.files[0];
+
+    if (file) {
+      imagePreview.src = URL.createObjectURL(file);
+      imagePreview.style.display = 'block';
+    }
+  });
+
 video.addEventListener("canplay", (ev) => {
   if (!streaming) {
     height = video.videoHeight / (video.videoWidth / width);
-
     video.setAttribute("width", width);
     video.setAttribute("height", height);
     canvas.setAttribute("width", width);
@@ -55,9 +66,9 @@ function takePicture() {
     canvas.width = width;
     canvas.height = height;
     context.drawImage(video, 0, 0, width, height);
-
     const data = canvas.toDataURL("image/png");
     photo.setAttribute("src", data);
+    picture.style.display = 'block';
   } else {
     clearPhoto();
   }

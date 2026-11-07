@@ -7,9 +7,17 @@
     <title>Website Gigigi</title>
 </head>
 <body>
+    
+    <p>Retro Puzzle</p>
 
-    <p>Welcome to the Website Gigigi! This is a sample webpage.</p>
-    <div class="camera">
+
+    <label for="choices">Choose a mode:</label>
+    <select name="options" id="options">
+        <option value="option1">Regular</option>
+        <option value="option2">Block</option>
+    </select>
+
+   <div class="camera">
         <video id="video">No Video.</video>
         <button id="start">Take a Picture!</button>
     </div>
@@ -17,15 +25,14 @@
     <div class="output">
         <img id="photo" src="" alt="The photo will be here!"/>
     </div>
-    <input type="file" name="myFiles" id="fileInput" multiple>
 
-    <label for="choices">Choose a bubble option:</label>
-    <select name="options" id="options">
-        <option value="option1">Regular</option>
-        <option value="option2">Block</option>
-    </select>
+    <input type="file" id="imageInput" accept="image/*">
 
-    <button id="generateButton">Generate</button>
+    <div id="previewContainer">
+        <img id="imagePreview" src="" alt="Image Preview" style="max-width: 300px; display: none;">
+    </div>
+
+    <script src="script gigigi"></script>
 
     <script src="script gigigi"></script>
 </body>
