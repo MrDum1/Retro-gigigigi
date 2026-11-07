@@ -7,8 +7,9 @@
     <title>Website Gigigi</title>
 </head>
 <body>
-
+    
     <p>Retro Puzzle</p>
+
 
     <label for="choices">Choose a mode:</label>
     <select name="options" id="options">
@@ -16,10 +17,14 @@
         <option value="option2">Block</option>
     </select>
 
-    <video id="camera" autoplay playsinline width="640" height="480" style="display: none;"></video>
-    <button id="photo">Take a Picture!</button>
-    <canvas id="canvas" width="640" height="480" style="display: none;"></canvas>
-    <img id="picture" />
+   <div class="camera">
+        <video id="video">No Video.</video>
+        <button id="start">Take a Picture!</button>
+    </div>
+    <canvas id="canvas" style="display: none;"></canvas>
+    <div class="output">
+        <img id="photo" src="" alt="The photo will be here!"/>
+    </div>
 
     <input type="file" id="imageInput" accept="image/*">
 
@@ -29,5 +34,6 @@
 
     <script src="script gigigi"></script>
 
+    <script src="script gigigi"></script>
 </body>
 </html>
