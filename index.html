@@ -1,29 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Website Gigigi</title>
-</head>
-<body>
-    
-    <p>Retro Puzzle</p>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Website Gigigi</title>
+    </head>
+
+    <body>
+
+        <div class="header">
+            
+            <h1 id="name">Retro Gigigi</h1>
+
+        </div>
+
+        <div class="content">
+
+            <div class="camera">
+
+                <video id="video">No Video.</video>
+                <button id="start" style="margin-bottom: 10px;">Take a Picture!</button>
+
+            </div>
 
     <label for="choices">Choose a mode:</label>
     <select name="options" id="options">
         <option value="option1">Regular</option>
         <option value="option2">Block</option>
     </select>
+            <canvas id="canvas" style="display: none;"></canvas>
 
-   <div class="camera">
-        <video id="video">No Video.</video>
-        <button id="start">Take a Picture!</button>
-    </div>
-    <canvas id="canvas" style="display: none;"></canvas>
-    <div class="output">
-        <img id="photo" src="" alt="The photo will be here!"/>
-    </div>
+            <div class="output">
+                <img id="photo" src="" alt="The photo will be here!"/>
+            </div>
+
+            <input type="file" id="imageInput" accept="image/*">
 
     <div id="grid"></div>
     <div>
@@ -34,6 +46,28 @@
 
     <script src="script gigigi"></script>
     <script src="splitting and dragging"></script>
+        </div>
 
-</body>
+        <div style="display: flex; flex-direction: row;">
+            <label for="choices">Choose a mode:</label>
+            <select name="options" id="options">
+                <option value="option1">Regular</option>
+                <option value="option2">Block</option>
+            </select>
+
+            <script src="script gigigi"></script>
+
+        </div>
+
+        <div style="display: flex; flex-direction: columns;">
+
+             <p>
+                The size of the image is <input type="number" id="width" style="width:50px;"> x <input type="number" id="length" style="width:50px;">.
+            </p>
+
+            <button id="submitButton">Submit</button>
+
+        </div>
+    
+    </body>
 </html>
