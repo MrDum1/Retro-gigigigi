@@ -17,6 +17,7 @@ imageInput.addEventListener('change', function() {
     const file = this.files[0];
 
     if (file) {
+        
         photo.setAttribute("src", URL.createObjectURL(file));
     }
   });
