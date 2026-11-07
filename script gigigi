@@ -12,14 +12,12 @@ const photo = document.getElementById("photo");
 video.hidden = true;
 
 const imageInput = document.getElementById('imageInput');
-const imagePreview = document.getElementById('imagePreview');
 
 imageInput.addEventListener('change', function() {
     const file = this.files[0];
 
     if (file) {
-      imagePreview.src = URL.createObjectURL(file);
-      imagePreview.style.display = 'block';
+        photo.setAttribute("src", URL.createObjectURL(file));
     }
   });
 
@@ -45,7 +43,8 @@ startButton.addEventListener("click", (ev) => {
         console.error('An error occurred: ${error}');
         });
 
-    if (video.hidden){ video.hidden = !video.hidden; } else {takePicture(); video.hidden = true; }
+    if (video.hidden){ 
+        video.hidden = !video.hidden; } else {takePicture(); video.hidden = true; }
     ev.preventDefault();
 });
 
