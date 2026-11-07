@@ -6,6 +6,11 @@ const grid = document.getElementById('grid');
 const widthInput = document.getElementById('width');
 const lengthInput = document.getElementById('length');
 
+const bgIMG = document.getElementById('bgIMG');
+bgIMG.style.opacity = 0.3;
+bgIMG.style.width = 480 + 'px';
+
+
 function splitImage (imageSelector, rows, cols)
 {
     const img = document.querySelector(imageSelector);
@@ -17,29 +22,21 @@ function splitImage (imageSelector, rows, cols)
     grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
     grid.style.gap = '4px';
 
-    const pieceWidth = img.width / cols;
-    const pieceHeight = img.height / rows;
-
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
-    canvas.width = pieceWidth;
-    canvas.height = pieceHeight;
+    const pieceWidth = img.naturalWidth / cols;
+    const pieceHeight = img.naturalHeight / rows;
 
     for (let r = 0; r < rows; r++)
     {
         for (let c = 0; c < cols; c++)
         {
-            context.clearRect(0, 0, pieceWidth, pieceHeight);
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = pieceWidth;
+            canvas.height = pieceHeight;
+            
             context.drawImage(img, c*pieceWidth, r*pieceHeight, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
-        
-            const slicedImg = new Image();
-            slicedImg.src = canvas.toDataURL('image/png');
-            slicedImg.alt = `Piece ${r}-${c}`;
-            slicedImg.style.position = 'relative';
-            slicedImg.style.cursor = 'move';
-            slicedImg.style.width = '100%';
 
-            grid.appendChild(slicedImg);
+            grid.appendChild(canvas);
         }
     }
 
@@ -49,6 +46,7 @@ function splitImage (imageSelector, rows, cols)
     {
         const j = Math.floor(Math.random() * (i+1));
         [items[i], items[j]] = [items[j], items[i]];
+        items[j].style.zIndex = `${i}`;
     }
 
     const fragment = document.createDocumentFragment();
@@ -58,13 +56,12 @@ function splitImage (imageSelector, rows, cols)
 }
 
 imageSplitter.addEventListener('click', () => {
-    if (!image.src == '') { splitImage('#photo', widthInput.valueAsNumber, lengthInput.valueAsNumber); pieceDragging(); image.hidden = true; } else { return; }
+    if (!image.src == '') { splitImage('#photo', widthInput.valueAsNumber, lengthInput.valueAsNumber); pieceDragging(); image.hidden = true; bgIMG.src = image.src; } else { return; }
 });
 
 function pieceDragging()
 {
     let isDragging = false;
-    let offsetx, offsety;
 
     const items = Array.from(grid.children);
     let mouseOver = new Array(items.length).fill(false);
@@ -79,14 +76,12 @@ function pieceDragging()
         item.addEventListener('mouseenter', (e) => {
             if (isDragging) { return; }
             mouseOver[items.findIndex(index => index === e.currentTarget)] = true;
-            e.currentTarget.style.zIndex = '9999';
             draggedItem = e.currentTarget;
         });
 
         item.addEventListener('mouseleave', (e) => {
             if (isDragging) { return; }
             mouseOver[items.findIndex(index => index === draggedItem)] = false;
-            e.currentTarget.style.zIndex = '1';
             draggedItem = '';
         });
 
