@@ -1,0 +1,98 @@
+
+const image = document.getElementById('photo')
+const imageSplitter = document.getElementById('imageSplitter');
+const grid = document.getElementById('grid');
+
+function splitImage (imageSelector, rows, cols)
+{
+    const img = document.querySelector(imageSelector);
+
+    if (!img.complete) { img.onload = () => splitImage(imageSelector, rows, cols); return; }
+
+    grid.innerHTML = '';
+    grid.style.display = 'grid';
+    grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    grid.style.gap = '4px';
+
+    const pieceWidth = img.width / cols;
+    const pieceHeight = img.height / rows;
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = pieceWidth;
+    canvas.height = pieceHeight;
+
+    for (let r = 0; r < rows; r++)
+    {
+        for (let c = 0; c < cols; c++)
+        {
+            context.clearRect(0, 0, pieceWidth, pieceHeight);
+            context.drawImage(img, c*pieceWidth, r*pieceHeight, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
+        
+            const slicedImg = new Image();
+            slicedImg.src = canvas.toDataURL('image/png');
+            slicedImg.alt = `Piece ${r}-${c}`;
+            slicedImg.style = "position: relative; cursor: move;";
+            slicedImg.style.width = '100%';
+
+            grid.appendChild(slicedImg);
+        }
+    }
+
+    const items = Array.from(grid.children);
+
+    for (let i = items.length - 1; i > 0; i--)
+    {
+        const j = Math.floor(Math.random() * (i+1));
+        [items[i], items[j]] = [items[j], items[i]];
+    }
+
+    const fragment = document.createDocumentFragment();
+    items.forEach(elem => fragment.appendChild(elem));
+    grid.innerHTML = '';
+    grid.appendChild(fragment);
+}
+
+imageSplitter.addEventListener('click', () => {
+    if (!image.src == '') { splitImage('#photo', 3, 3); pieceDragging(); image.hidden = true; } else { return; }
+});
+
+function pieceDragging()
+{
+    let isDragging = false;
+    let offsetX, offsetY;
+
+    const items = Array.from(grid.children);
+    let mouseOver = new Array(items.length).fill(false);
+
+    for (n = 0; n < items.length; n++)
+    {
+        const item = items[n];
+
+        item.addEventListener('mouseenter', (e) => {
+            mouseOver[items.findIndex(e.currentTarget)] = true;
+        });
+
+        item.addEventListener('mouseleave', (e) => {
+            mouseOver[items.findIndex(e.currentTarget)] = false;
+        });
+
+        item.addEventListener('mousedown', (e) => {
+            if (!mouseOver[items.findIndex(e.currentTarget)]) { return; }
+            isDragging = true;
+            offsetX = e.clientX - item.offsetLeft;
+            offsetY = e.clientY - item.offsetTop;
+            e.preventDefault();
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) { return; }
+            item.style.left = `${e.clientX - offsetX}px`;
+            item.style.top = `${e.clientY - offsetY}px`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+    }
+}
