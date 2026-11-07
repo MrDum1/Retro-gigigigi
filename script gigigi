@@ -1,29 +1,25 @@
-
 const width = 320;
 let height = 0;
 
 let streaming = false;
 
-const video = document.getElementById("video");
-const canvas = document.getElementById("canvas");
+const video = document.getElementById('video');
+const camera = document.getElementById('camera');
+const canvas = document.getElementById('canvas');
 const startButton = document.getElementById("start");
-const photo = document.getElementById("photo");
-
-video.hidden = true;
+const photoButton = document.getElementById('photo');
+const picture = document.getElementById('picture');
 
 const imageInput = document.getElementById('imageInput');
-let currentImageUrl = null;
+const imagePreview = document.getElementById('imagePreview');
 
+video.hidden = true;
 imageInput.addEventListener('change', function() {
-    const file = this.files[0];
+    const file = this.files[0]; 
 
     if (file) {
-        if (currentImageUrl) {
-            URL.revokeObjectURL(currentImageUrl);
-        }
-        currentImageUrl = URL.createObjectURL(file);
-        photo.setAttribute("src", currentImageUrl);
-        photo.hidden = false;
+      imagePreview.src = URL.createObjectURL(file);
+      imagePreview.style.display = 'block'; 
     }
   });
 
@@ -63,6 +59,8 @@ function clearPhoto() {
   photo.setAttribute("src", data);
   photo.hidden = false;
 }
+
+clearPhoto();
 
 function takePicture() {
   const context = canvas.getContext("2d");
