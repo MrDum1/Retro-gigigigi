@@ -19,7 +19,8 @@ function splitImage (imageSelector, rows, cols)
 
     grid.innerHTML = '';
     grid.style.display = 'grid';
-    grid.style.gridTemplateColumns = `repeat(${cols}, 1fr)`;
+    grid.style.width = bgIMG.style.width;
+    grid.style.gridTemplateColumns = `repeat(${cols}, minmax(0, 1fr))`;
     grid.style.gap = '4px';
 
     const pieceWidth = img.naturalWidth / cols;
@@ -33,6 +34,9 @@ function splitImage (imageSelector, rows, cols)
             const context = canvas.getContext('2d');
             canvas.width = pieceWidth;
             canvas.height = pieceHeight;
+            canvas.style.width = '100%';
+            canvas.style.height = 'auto';
+            canvas.style.display = 'block';
             
             context.drawImage(img, c*pieceWidth, r*pieceHeight, pieceWidth, pieceHeight, 0, 0, pieceWidth, pieceHeight);
 
@@ -56,7 +60,14 @@ function splitImage (imageSelector, rows, cols)
 }
 
 imageSplitter.addEventListener('click', () => {
-    if (!image.src == '') { splitImage('#photo', widthInput.valueAsNumber, lengthInput.valueAsNumber); pieceDragging(); image.hidden = true; bgIMG.src = image.src; } else { return; }
+    if (!image.src == '') { 
+        splitImage('#photo', widthInput.valueAsNumber, lengthInput.valueAsNumber); 
+        pieceDragging(); 
+        image.hidden = true; 
+        bgIMG.src = image.src; 
+    } else { 
+        return; 
+    }
 });
 
 function pieceDragging()

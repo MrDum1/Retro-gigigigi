@@ -8,42 +8,27 @@ const camera = document.getElementById('camera');
 const canvas = document.getElementById('canvas');
 const startButton = document.getElementById("start");
 const photo = document.getElementById("photo");
-const IMG = document.createElement('img');
 
 const imageInput = document.getElementById('imageInput');
-const imagePreview = document.getElementById('imagePreview');
 let cameraStream = null;
+let currentImageUrl = null;
 video.hidden = true;
 
 const description = document.querySelector('.description');
 
 imageInput.addEventListener('change', function() {
-    const file = this.files[0]; 
+    const file = this.files[0];
 
     if (file) {
+        description.style.display = "none";
         if (currentImageUrl) {
             URL.revokeObjectURL(currentImageUrl);
         }
         currentImageUrl = URL.createObjectURL(file);
-        IMG.setAttribute("src", currentImageUrl);
-
-        IMG.onload = function()
-        {
-          const newCanvas = document.createElement('canvas');
-          const aspectRatio = IMG.naturalHeight / IMG.naturalWidth;
-          newCanvas.width = width;
-          newCanvas.height = width * aspectRatio;
-
-          const ctx = newCanvas.getContext('2d');
-
-          ctx.drawImage(IMG, 0, 0, width, width * aspectRatio);
-
-          const newSRC = newCanvas.toDataURL('image/jpeg');
-          photo.setAttribute('src', newSRC);
-          photo.hidden = false;
-        };
+        photo.src = currentImageUrl;
+        photo.hidden = false;
     }
-  });
+});
 
 video.addEventListener("canplay", (ev) => {
   if (!streaming) {
