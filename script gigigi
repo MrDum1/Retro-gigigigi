@@ -10,8 +10,6 @@ const startButton = document.getElementById("start");
 const photo = document.getElementById("photo");
 const IMG = document.createElement('img');
 
-video.hidden = true;
-
 const imageInput = document.getElementById('imageInput');
 const imagePreview = document.getElementById('imagePreview');
 
