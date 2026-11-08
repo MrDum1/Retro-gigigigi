@@ -20,7 +20,7 @@
             <div class="camera" style="display: flex; flex-direction: column; align-items: center;">
 
                 <video id="video">No Video.</video>
-                <button id="start" style="margin: 10px;">Take a Picture!</button>
+                <button id="start" style="margin: 10px; background-color: #E0F8C7;">Take a Picture!</button>
 
             </div>
 
@@ -28,8 +28,20 @@
     
             <canvas id="canvas" style="display: none;"></canvas>
 
-            <div class="output">
-                <img id="photo" src=""/>
+            <div style="display: flex; flex-direction: row; align-items: center; justify-content: center; margin-top: 20px;">
+                <div class="description">
+                    <h1 id="about">About Retro Gigigi</h1>
+                    <div class="description-text">
+                        <p id="welcome">Welcome to Retro Gigigi! This is a simple web application that allows you to take a picture or upload an image, and then split it into puzzle pieces for you to solve. You can adjust the number of puzzle pieces by changing the columns and rows.</p>
+                        <p id="instructions">To get started, either take a picture using your camera or upload an image from your device. Then, click the "Make My Puzzle You Peasant!" button to generate the puzzle pieces. Enjoy!</p>
+                    </div>
+                </div>
+
+                <div class="output" style="width:fit-content; height:fit-content; display:flex; flex-direction:column; align-items:center; margin-left: 20px;">
+
+                    <img id="photo" src="" />
+
+                </div>
             </div>
     
             <div id="grid" aria-label="Puzzle pieces"></div>
